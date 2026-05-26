@@ -1,0 +1,45 @@
+<section class="card list-section">
+  <div class="list-header">
+    <h2>All incidents</h2>
+    <button type="button" class="btn-secondary" (click)="refresh.emit()" [disabled]="loading">
+      Refresh
+    </button>
+  </div>
+
+  @if (loading) {
+    <p class="muted">Loading…</p>
+  } @else if (incidents.length === 0) {
+    <p class="muted empty">
+      No incidents yet.
+      @if (!showCreateForm) {
+        Press <strong>Create ticket</strong> to add one.
+      }
+    </p>
+  } @else {
+    <ul class="incident-list">
+      @for (incident of incidents; track incident.id) {
+        <li class="incident-item" [class.resolved]="incident.status === 'resolved'">
+          <div class="incident-main">
+            <span class="status" [attr.data-status]="incident.status">
+              {{ incident.status }}
+            </span>
+            <h3 class="incident-title">{{ incident.title }}</h3>
+            <time class="incident-date" [attr.datetime]="incident.createdAt">
+              {{ incident.createdAt | date: 'medium' }}
+            </time>
+          </div>
+          @if (incident.status === 'open') {
+            <button
+              type="button"
+              class="btn-resolve"
+              (click)="resolve.emit(incident)"
+              [disabled]="resolvingId === incident.id"
+            >
+              {{ resolvingId === incident.id ? 'Resolving…' : 'Resolve' }}
+            </button>
+          }
+        </li>
+      }
+    </ul>
+  }
+</section>

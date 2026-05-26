@@ -1,0 +1,44 @@
+name: Frontend CI
+
+on:
+  push:
+    paths:
+      - 'Frontend/**'
+  pull_request:
+    paths:
+      - 'Frontend/**'
+
+jobs:
+  build:
+    name: Build and Test Frontend
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [20.x]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+        working-directory: Frontend
+
+      - name: Build frontend
+        run: npm run build -- --configuration production
+        working-directory: Frontend
+
+      - name: Run unit tests with coverage
+        run: npm test -- --watch=false --browsers=ChromeHeadless --code-coverage
+        working-directory: Frontend
+
+      - name: Upload frontend coverage artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: frontend-coverage
+          path: Frontend/coverage

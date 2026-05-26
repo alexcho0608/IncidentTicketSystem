@@ -1,0 +1,75 @@
+.page {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 3rem;
+}
+
+.header {
+  margin-bottom: 1.5rem;
+}
+
+.header-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.header h1 {
+  margin: 0 0 0.25rem;
+  font-size: 1.75rem;
+  font-weight: 700;
+}
+
+.subtitle {
+  margin: 0;
+  color: #5c6370;
+  font-size: 0.95rem;
+}
+
+.btn-primary {
+  padding: 0.6rem 1rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: 500;
+  white-space: nowrap;
+  background: #2563eb;
+  color: #fff;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: #1d4ed8;
+}
+
+.btn-primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.banner {
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+
+.banner.error {
+  background: #fde8e8;
+  color: #9b1c1c;
+  border: 1px solid #f5c2c2;
+}
+
+.card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 1.25rem 1.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  margin-bottom: 1.25rem;
+}
+
+.card h2 {
+  margin: 0 0 1rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+

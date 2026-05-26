@@ -1,0 +1,15 @@
+@TicketSystem.Api_HostAddress = http://localhost:5197
+
+### Create incident
+POST {{TicketSystem.Api_HostAddress}}/api/incidents
+Content-Type: application/json
+
+{
+  "title": "Database connection timeout"
+}
+
+### List incidents
+GET {{TicketSystem.Api_HostAddress}}/api/incidents
+
+### Resolve incident
+POST {{TicketSystem.Api_HostAddress}}/api/incidents/{{incidentId}}/resolve

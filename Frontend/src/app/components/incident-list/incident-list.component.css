@@ -1,0 +1,116 @@
+.list-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.list-header h2 {
+  margin: 0;
+}
+
+.btn-resolve,
+.btn-secondary {
+  padding: 0.6rem 1rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.btn-resolve {
+  background: #2563eb;
+  color: #fff;
+}
+
+.btn-resolve:hover:not(:disabled) {
+  background: #1d4ed8;
+}
+
+.btn-resolve:disabled,
+.btn-secondary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn-secondary {
+  background: #eef1f4;
+  color: #374151;
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background: #e2e6ea;
+}
+
+.muted {
+  color: #6b7280;
+  margin: 0;
+}
+
+.empty {
+  text-align: center;
+  padding: 1.5rem 0;
+}
+
+.incident-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.incident-item {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  background: #fafbfc;
+}
+
+.incident-item.resolved {
+  opacity: 0.85;
+  background: #f3f4f6;
+}
+
+.incident-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.status {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+  margin-bottom: 0.35rem;
+}
+
+.status[data-status='open'] {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+.status[data-status='resolved'] {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.incident-title {
+  margin: 0 0 0.25rem;
+  font-size: 1rem;
+  font-weight: 600;
+  word-break: break-word;
+}
+
+.incident-date {
+  font-size: 0.8rem;
+  color: #6b7280;
+}

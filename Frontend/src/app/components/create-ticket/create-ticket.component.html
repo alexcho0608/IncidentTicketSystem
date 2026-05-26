@@ -1,0 +1,29 @@
+<section class="card create-section">
+  <h2>New ticket</h2>
+
+  @if (error) {
+    <div class="banner error" role="alert">{{ error }}</div>
+  }
+
+  <form class="create-form" (ngSubmit)="submit()">
+    <label class="sr-only" for="title">Title</label>
+    <input
+      id="title"
+      type="text"
+      name="title"
+      [(ngModel)]="title"
+      placeholder="Describe the issue…"
+      [disabled]="submitting"
+      required
+      autofocus
+    />
+    <div class="form-actions">
+      <button type="submit" class="btn-primary" [disabled]="submitting || !title.trim()">
+        {{ submitting ? 'Creating…' : 'Create' }}
+      </button>
+      <button type="button" class="btn-secondary" (click)="cancel()" [disabled]="submitting">
+        Cancel
+      </button>
+    </div>
+  </form>
+</section>

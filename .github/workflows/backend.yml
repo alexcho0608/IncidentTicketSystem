@@ -1,0 +1,49 @@
+name: Backend CI
+
+on:
+  push:
+    paths:
+      - 'Backend/**'
+  pull_request:
+    paths:
+      - 'Backend/**'
+
+jobs:
+  build:
+    name: Build and Test Backend
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        dotnet-version: [10.0]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{ matrix.dotnet-version }}
+
+      - name: Restore dependencies
+        run: dotnet restore Backend/TicketSystem.Api.sln
+
+      - name: Build solution
+        run: dotnet build Backend/TicketSystem.Api.sln --configuration Release --no-restore
+
+      - name: Install report generator
+        run: |
+          dotnet tool install --global dotnet-reportgenerator-globaltool --version 5.0.0
+          echo "$HOME/.dotnet/tools" >> $GITHUB_PATH
+
+      - name: Run tests with coverage
+        run: dotnet test Backend/TicketSystem.Api.sln --configuration Release --no-restore --collect:"XPlat Code Coverage" --results-directory Backend/TestResults
+
+      - name: Generate coverage report
+        run: |
+          reportgenerator -reports:Backend/TestResults/**/*.xml -targetdir:Backend/coverage-report -reporttypes:HtmlInline_AzurePipelines
+
+      - name: Upload backend coverage artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: backend-coverage
+          path: Backend/coverage-report

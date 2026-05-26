@@ -1,0 +1,32 @@
+version: '3.9'
+
+services:
+  backend:
+    build:
+      context: ./Backend/TicketSystemApi
+      dockerfile: Dockerfile
+    image: ticket-system-backend:latest
+    container_name: ticket-system-backend
+    restart: unless-stopped
+    ports:
+      - "${BACKEND_PORT}:80"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+
+  frontend:
+    build:
+      context: ./Frontend
+      dockerfile: Dockerfile
+    image: ticket-system-frontend:latest
+    container_name: ticket-system-frontend
+    restart: unless-stopped
+    ports:
+      - "${FRONTEND_PORT}:80"
+    volumes:
+      - ./Frontend/src/assets/config.json:/usr/share/nginx/html/assets/config.json
+    depends_on:
+      - backend
+
+networks:
+  default:
+    name: ticket-system-network

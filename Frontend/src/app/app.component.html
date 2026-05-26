@@ -1,0 +1,35 @@
+<div class="page">
+  <header class="header">
+    <div class="header-row">
+      <div>
+        <h1>Incidents</h1>
+        <p class="subtitle">View and resolve support incidents v2</p>
+      </div>
+      @if (!showCreateForm) {
+        <button type="button" class="btn-primary" (click)="openCreateForm()">
+          Create ticket
+        </button>
+      }
+    </div>
+  </header>
+
+  @if (error) {
+    <div class="banner error" role="alert">{{ error }}</div>
+  }
+
+  @if (showCreateForm) {
+    <app-create-ticket
+      (created)="onTicketCreated($event)"
+      (cancelled)="onCreateCancelled()"
+    />
+  }
+
+  <app-incident-list
+    [incidents]="incidents"
+    [loading]="loading"
+    [resolvingId]="resolvingId"
+    [showCreateForm]="showCreateForm"
+    (refresh)="loadIncidents()"
+    (resolve)="resolveIncident($event)"
+  />
+</div>
