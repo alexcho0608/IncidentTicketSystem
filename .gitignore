@@ -24,7 +24,6 @@ packages/
 # Environment-specific files
 appsettings.Development.json
 appsettings.Test.json
-.env
 .env.local
 
 # Angular
