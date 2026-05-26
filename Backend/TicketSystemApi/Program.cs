@@ -12,7 +12,7 @@ builder.Services.AddCors(options =>
             .AllowAnyHeader()
             .AllowAnyMethod());
 });
-
+//
 builder.Services.AddSingleton<IIncidentService, InMemoryIncidentService>();
 builder.Services.ConfigureHttpJsonOptions(options =>
 {
